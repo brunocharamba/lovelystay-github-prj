@@ -33,6 +33,13 @@ export const StyledUserInformationWrapper = styled.div`
   & > :first-child {
     background-color: ${colors.darkGray + "40"};
     border-radius: 0.5rem 0 0 0.5rem;
+
+    svg {
+      cursor: pointer;
+      font-size: x-large;
+      position: absolute;
+      margin: 0.5rem 0 0 0.5rem;
+    }
   }
 
   & > :nth-child(2) {

@@ -1,6 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { FaHiking, FaRegMap, FaBuilding, FaGithub, FaBloggerB } from "react-icons/fa";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaHiking, FaRegMap, FaBuilding, FaGithub, FaBloggerB, FaArrowCircleLeft } from "react-icons/fa";
 
 import RepositoriesList from "../../components/RepositoriesList";
 import useFetch from "../../hooks/useFetch";
@@ -22,6 +22,7 @@ import NotFound from "../../components/NotFound";
 function User() {
   const { id } = useParams();
   const { data, isLoading } = useFetch(`https://api.github.com/users/${id}`);
+  const navigate = useNavigate();
 
   const renderInformationCards = () => {
     return (
@@ -93,6 +94,7 @@ function User() {
         <StyledContentWrapper>
           <StyledUserInformationWrapper>
             <div>
+              <FaArrowCircleLeft onClick={() => navigate("/")} />
               <StyledImage src={data.avatar_url} />
             </div>
             <div>
