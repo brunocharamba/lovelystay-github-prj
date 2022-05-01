@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { FaUserAlt, FaRegMap, FaBuilding, FaGithub } from "react-icons/fa";
+import { FaHiking, FaRegMap, FaBuilding, FaGithub, FaBloggerB } from "react-icons/fa";
 
 import RepositoriesList from "../../components/RepositoriesList";
 import useFetch from "../../hooks/useFetch";
@@ -14,50 +14,78 @@ import {
   StyledUserInformation,
   StyledInformationField,
   StyledMainContent,
+  StyledUserTitle,
 } from "./styles";
-import QuoteCard from "../../components/QuoteCard";
+import Loading from "../../components/Loading";
+import NotFound from "../../components/NotFound";
 
 function User() {
   const { id } = useParams();
-  const { data, error, status, isLoading } = useFetch(`https://api.github.com/users/${id}`);
-
-  if (isLoading) return <div>loading...</div>;
-
-  console.log(data);
+  const { data, isLoading } = useFetch(`https://api.github.com/users/${id}`);
 
   const renderInformationCards = () => {
     return (
       <StyledUserInformation>
-        <StyledInformationField>
-          <FaUserAlt />
-          <span>{data.login}</span>
-        </StyledInformationField>
-        <StyledInformationField>
-          <FaBuilding />
-          <span>{data.company}</span>
-        </StyledInformationField>
-        <StyledInformationField>
-          <FaRegMap />
-          <span>{data.location}</span>
-        </StyledInformationField>
-        <StyledInformationField>
-          <FaRegMap />
-          <span>{data.followers}</span>
-          <span>followers</span>
-        </StyledInformationField>
-        <StyledInformationField>
-          <FaGithub />
-          <span>{data.public_repos}</span>
-          <span>public repositories</span>
-        </StyledInformationField>
-        <StyledInformationField>
-          <FaGithub />
-          <span>{data.public_gists}</span>
-          <span>public gists</span>
-        </StyledInformationField>
+        {data.company && (
+          <StyledInformationField>
+            <>
+              <FaBuilding />
+              <span>{data.company}</span>
+            </>
+          </StyledInformationField>
+        )}
+        {data.location && (
+          <StyledInformationField>
+            <>
+              <FaRegMap />
+              <span>{data.location}</span>
+            </>
+          </StyledInformationField>
+        )}
+        {data.followers > 0 && (
+          <StyledInformationField>
+            <>
+              <FaHiking />
+              <span>{data.followers}</span>
+              <span>followers</span>
+            </>
+          </StyledInformationField>
+        )}
+        {data.blog && (
+          <StyledInformationField>
+            <>
+              <FaBloggerB />
+              <div onClick={() => window.open(data.blog)}>blog</div>
+            </>
+          </StyledInformationField>
+        )}
+        {data.public_repos > 0 && (
+          <StyledInformationField>
+            <>
+              <FaGithub />
+              <span>{data.public_repos}</span>
+              <span>public repositories</span>
+            </>
+          </StyledInformationField>
+        )}
+        {data.public_gists > 0 && (
+          <StyledInformationField>
+            <>
+              <FaGithub />
+              <span>{data.public_gists}</span>
+              <span>public gists</span>
+            </>
+          </StyledInformationField>
+        )}
       </StyledUserInformation>
     );
   };
+
+  if (!id) return <NotFound />;
+  if (isLoading) return <Loading />;
+  if (data.message) return <NotFound />;
+
+  console.log(data);
 
   return (
     <StyledContainer>
@@ -68,10 +96,11 @@ function User() {
               <StyledImage src={data.avatar_url} />
             </div>
             <div>
-              <h3>{data.name}</h3>
+              <StyledUserTitle>
+                <h3 onClick={() => window.open(data.html_url)}>{data.name || `NO DISPLAY NAME`}</h3>
+                <div>@{data.login}</div>
+              </StyledUserTitle>
               {renderInformationCards()}
-              {/* <StyledUserInformation>{renderInformationCards()}</StyledUserInformation> */}
-              {/* <QuoteCard text={data.bio} /> */}
             </div>
           </StyledUserInformationWrapper>
           <StyledMainContent>
