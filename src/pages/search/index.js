@@ -2,8 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSearch, FaGithub } from "react-icons/fa";
 
-import useFetch from "../../hooks/useFetch";
-
 import { Container, StyledSearchBox } from "./styles";
 
 const baseMessage = "type the github's username...";

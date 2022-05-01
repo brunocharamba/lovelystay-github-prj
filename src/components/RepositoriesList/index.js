@@ -1,12 +1,10 @@
 import React from "react";
-import useFetch from "../../hooks/useFetch";
+import { useFetch } from "../../hooks";
 
 import { StyledContainer, StyledCardContainer, StyledCardTitle, StyledCardDescription, StyledCardDetails } from "./styles";
 
-function RepositoriesList({ userId }) {
-  const { data: repositories, isLoading } = useFetch(`https://api.github.com/users/${userId}/repos`);
-
-  console.log(repositories);
+function RepositoriesList({ repositories, loading }) {
+  // const { data: repositories, isLoading } = useFetch(`https://api.github.com/users/${userId}/repos`);
 
   const renderCards = () => {
     return repositories.map((repo) => {
@@ -20,7 +18,7 @@ function RepositoriesList({ userId }) {
     });
   };
 
-  if (isLoading) return;
+  if (loading) return;
   if (!repositories || repositories.length === 0) return <h2>NO REPOSITORIES FOUND</h2>;
   return (
     <>

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaHiking, FaRegMap, FaBuilding, FaGithub, FaBloggerB, FaArrowCircleLeft } from "react-icons/fa";
 
 import RepositoriesList from "../../components/RepositoriesList";
-import useFetch from "../../hooks/useFetch";
+import { useFetchUser, useFetchRepos } from "../../hooks";
 
 import {
   StyledContainer,
@@ -21,7 +21,8 @@ import NotFound from "../../components/NotFound";
 
 function User() {
   const { id } = useParams();
-  const { data, isLoading } = useFetch(`https://api.github.com/users/${id}`);
+  const { data, isLoading } = useFetchUser(id);
+  const { data: repositories, isLoading: repositoriesLoading } = useFetchRepos(id);
   const navigate = useNavigate();
 
   const renderInformationCards = () => {
@@ -86,15 +87,13 @@ function User() {
   if (isLoading) return <Loading />;
   if (data.message) return <NotFound />;
 
-  console.log(data);
-
   return (
     <StyledContainer>
       <StyledContentWrapper>
         <StyledContentWrapper>
           <StyledUserInformationWrapper>
             <div>
-              <FaArrowCircleLeft onClick={() => navigate("/")} />
+              <FaArrowCircleLeft data-testid="gobackbutton" onClick={() => navigate("/")} />
               <StyledImage src={data.avatar_url} />
             </div>
             <div>
@@ -106,7 +105,7 @@ function User() {
             </div>
           </StyledUserInformationWrapper>
           <StyledMainContent>
-            <RepositoriesList userId={id} />
+            <RepositoriesList repositories={repositories} loading={repositoriesLoading} />
           </StyledMainContent>
         </StyledContentWrapper>
       </StyledContentWrapper>
