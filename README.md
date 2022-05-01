@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Code Challenge - Bruno Charamba
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+As asked, this .md contains the information about the challenge. All the instructions and further explanations about the architecture and decisions can seen below.
 
-## Available Scripts
+# Language and Framework
 
-In the project directory, you can run:
+Following the rules, Javascript was selected as the main language. And for the Framework, React.
 
-### `yarn start`
+# Environment and Code Editor
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project was created in React using the _Create-React-App_ command, which facilitates the initial setup with the automatic install of some dependencies like _eslint_, _jest_ and others.
+The coding was done in Visual Studio Code with some extensions, as _prettier_, _eslint_ and other visual packages.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Architecture and Complexity
 
-### `yarn test`
+Despite the project's scope being restrict, the project contains some packages to enable an easy development and scalability.
+This projects uses the _styled-components_ package to provide a better management of the component's styles, _react-icons_ to integrate visual icons, and the _react-router-dom_ to manage the page's routing.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Project Tree**
 
-### `yarn build`
+The simplified version of the project tree can be described as follow:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **components**: reusable bits of the project
+- **pages**: the pages that can be displayed by an URL
+- **hooks**: custom hooks for the application
+- **utils**: paramenters and global functions
+- **routes**: routing for the pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Structure**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The project contains 2 pages, the first one _"Search"_ is a basic page with an _input_, a _button_ and a _div_ to inform the user about the state of the input. This _input_ gets its content and pass the search result to the next page using the _path management_ of the _react-router-dom_.
 
-### `yarn eject`
+The second page is the _"User"_ page, that is more complex than the first one. this page gets the username from the path parameter (i.e. "../user/brunocharamba") and uses it to call the _useFetch_ hook to load the github's user information and populate the page with some information. At the top it's possible to see the user's avatar, as well as the name, login, location, repositories and more.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The last part of the page is filled with the _RepositoriesList_ component, that renders all the _public repositories_ listed for the user. This components renders cards for each of the repositories, that can be accessed on github by clicking on the title. the username is passed by props to the _RepositoriesList_ component, and inside it, the _useFetch_ hook is used again, but this time by requesting the _repos_ endpoint, that get the repositories information.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+_It's possible to enhance this project?_
+Yes, it is. Given time, I could use _Redux_ to store the user and repositories data in a global state to avoid passing data betweeen components. I could also enhance the custom _useFecth_ hook to cache the information, or using memoization the reduce the load of the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Configuration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run this application you'll need to have all the React prerequisites installed.
+To download the project on github, you'll need to have Git installed on your OS.
 
-## Learn More
+The project can be cloned through this repo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [https://github.com/brunocharamba/lovelystay-github-prj](https://github.com/brunocharamba/lovelystay-github-prj)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Or you can clone it using this command line:
 
-### Code Splitting
+```bash
+git clone https://github.com/brunocharamba/lovelystay-github-prj.git
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+After downloading it, you'll need to install the project's dependencies. On the root of the project, where you can find the file _package.json_:
 
-### Analyzing the Bundle Size
+```bash
+# with Yarn:
+yarn install
+# or with npm:
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Running the project
 
-### Making a Progressive Web App
+To run the project, on the project's root path, run the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+# with Yarn:
+yarn start
+# or with npm:
+npm start
+```
