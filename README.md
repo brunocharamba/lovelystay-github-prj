@@ -32,10 +32,10 @@ The project contains 2 pages, the first one _"Search"_ is a basic page with an _
 
 The second page is the _"User"_ page, that is more complex than the first one. this page gets the username from the path parameter (i.e. "../user/brunocharamba") and uses it to call the _useFetch_ hook to load the github's user information and populate the page with some information. At the top it's possible to see the user's avatar, as well as the name, login, location, repositories and more.
 
-The last part of the page is filled with the _RepositoriesList_ component, that renders all the _public repositories_ listed for the user. This components renders cards for each of the repositories, that can be accessed on github by clicking on the title. the username is passed by props to the _RepositoriesList_ component, and inside it, the _useFetch_ hook is used again, but this time by requesting the _repos_ endpoint, that get the repositories information.
+The last part of the page is filled with the _RepositoriesList_ component, that renders all the _public repositories_ listed for the user. This components renders cards for each of the repositories, that can be accessed on github by clicking on the title. the list of repositories is passed by props to the _RepositoriesList_ component.
 
 _It's possible to enhance this project?_
-Yes, it is. Given time, I could use _Redux_ to store the user and repositories data in a global state to avoid passing data betweeen components. I could also enhance the custom _useFecth_ hook to cache the information, or using memoization the reduce the load of the application.
+Yes, it is. Given time, I could use _Redux_ to store the user and repositories data in a global state to avoid passing data betweeen components. I could also enhance the custom _useFecth_ hook to cache the information, or using memoization the reduce the load of the application. As well improve the responsiveness for mobile devices, as this project was developed to the use on desktops.
 
 # Configuration
 
