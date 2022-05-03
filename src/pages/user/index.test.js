@@ -1,9 +1,8 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import * as router from "react-router-dom";
 
 import User from "../../pages/user";
-import * as useFetchUser from "../../hooks/useFetchUser";
-import * as useFetchRepos from "../../hooks/useFetchRepos";
+import * as useFetch from "../../hooks/useFetch";
 
 const mockUserFetch = {
   data: {
@@ -51,8 +50,7 @@ describe("User page", () => {
   });
 
   it("should fetch correctly and display the data", async () => {
-    jest.spyOn(useFetchUser, "default").mockImplementation(() => mockUserFetch);
-    jest.spyOn(useFetchRepos, "default").mockImplementation(() => mockReposFetch);
+    jest.spyOn(useFetch, "default").mockReturnValueOnce(mockUserFetch).mockReturnValueOnce(mockReposFetch);
 
     const { debug } = render(<User />);
 
@@ -65,9 +63,7 @@ describe("User page", () => {
 
   it("should not fetch correctly and display that the user does not exist", async () => {
     router.useParams = () => "brunochareamasdhuh234904";
-
-    jest.spyOn(useFetchUser, "default").mockImplementation(() => mockUserFetch);
-    jest.spyOn(useFetchRepos, "default").mockImplementation(() => mockReposFetch);
+    jest.spyOn(useFetch, "default").mockReturnValueOnce(mockUserFetch).mockReturnValueOnce(mockReposFetch);
 
     const { debug } = render(<User />);
 

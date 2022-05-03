@@ -1,4 +1,5 @@
 import { colors } from "./colors";
 import { sizes } from "./sizes";
+import * as helper from "./helper";
 
-export { colors, sizes };
+export { colors, sizes, helper };

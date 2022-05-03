@@ -9,7 +9,9 @@ function NotFound() {
 
   return (
     <StyledContainer>
-      <FaArrowCircleLeft onClick={() => navigate("/")} />
+      <button onClick={() => navigate("/")}>
+        <FaArrowCircleLeft />
+      </button>
       User not found
     </StyledContainer>
   );

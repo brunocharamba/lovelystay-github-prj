@@ -1,30 +1,34 @@
 import styled from "styled-components";
-import { colors } from "../../utils";
+import { colors, sizes } from "../../utils";
 
 export const StyledContainer = styled.div`
   display: flex;
-  flex: 1;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
 `;
 
 export const StyledCardContainer = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
   padding: 1rem;
-  min-width: 10rem;
-  min-height: 10rem;
-  max-width: 12rem;
-  max-height: 12rem;
+  height: 10rem;
+  flex-shrink: 0;
+  flex-grow: 1;
+
+  width: 10rem;
+
   border-radius: 0.5rem;
   background: ${colors.lighterGray + "30"};
-  color: #fefefe;
+  color: ${colors.light};
   box-shadow: 4px 3px 9px 0px rgba(0, 0, 0, 0.75);
+
+  /* @media (max-width: ${sizes.mobile}) {
+    width: 100%;
+  } */
 `;
 
-export const StyledCardTitle = styled.div`
-  cursor: pointer;
+export const StyledCardTitle = styled.a`
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;

@@ -1,4 +1,3 @@
-import useFetchUser from "./useFetchUser";
-import useFetchRepos from "./useFetchRepos";
+import useFetch from "./useFetch";
 
-export { useFetchUser, useFetchRepos };
+export { useFetch };

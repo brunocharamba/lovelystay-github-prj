@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import * as router from "react-router-dom";
 
 import RepositoriesList from "../../components/RepositoriesList";
-import * as useFetchRepos from "../../hooks/useFetchRepos";
+import * as useFetch from "../../hooks/useFetch";
 
 const mockReposFetch = {
   data: [
@@ -26,7 +26,7 @@ jest.mock("react-router-dom", () => {
 
 describe("RepositoriesList component", () => {
   it("should fetch correctly and display the loading", async () => {
-    jest.spyOn(useFetchRepos, "default").mockImplementation(() => mockReposFetch);
+    jest.spyOn(useFetch, "default").mockImplementation(() => mockReposFetch);
 
     const { debug } = render(<RepositoriesList repositories={[]} loading={true} />);
 
@@ -36,7 +36,7 @@ describe("RepositoriesList component", () => {
   });
 
   it("should fetch correctly and display the data", async () => {
-    jest.spyOn(useFetchRepos, "default").mockImplementation(() => mockReposFetch);
+    jest.spyOn(useFetch, "default").mockImplementation(() => mockReposFetch);
 
     const { debug } = render(<RepositoriesList repositories={mockReposFetch.data} loading={false} />);
 

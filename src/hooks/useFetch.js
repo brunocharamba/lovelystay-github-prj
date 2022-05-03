@@ -1,17 +1,17 @@
 import React from "react";
 
-function useFetchUser(userId) {
+function useFetch(endpoint) {
   const [data, setData] = React.useState(null);
   const [status, setStatus] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (!userId) return;
+    if (!endpoint) return;
 
     const fetchUrl = async () => {
       try {
-        const response = await fetch(`https://api.github.com/users/${userId}`);
+        const response = await fetch(`https://api.github.com/users/${endpoint}`);
 
         setStatus(response.status);
 
@@ -25,9 +25,9 @@ function useFetchUser(userId) {
     };
 
     fetchUrl();
-  }, [userId]);
+  }, [endpoint]);
 
   return { data, status, error, isLoading };
 }
 
-export default useFetchUser;
+export default useFetch;

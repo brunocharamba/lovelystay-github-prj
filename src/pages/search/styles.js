@@ -7,7 +7,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  //background-color: ${colors.darkGray};
   background: linear-gradient(217deg, ${colors.darkPurple}, ${colors.purple});
 
   & > svg {
@@ -19,6 +18,8 @@ export const Container = styled.div`
 
   & span {
     color: ${colors.lighterGray};
+    padding: 0 1rem;
+    text-align: center;
   }
 `;
 
@@ -57,10 +58,12 @@ export const StyledSearchBox = styled.div`
     color: ${colors.lighterGray};
   }
 
-  & div {
+  & button {
     display: flex;
     justify-content: center;
     align-items: center;
     color: ${colors.lighterGray};
+    background: none;
+    border: 0;
   }
 `;

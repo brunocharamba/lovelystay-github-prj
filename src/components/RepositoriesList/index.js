@@ -10,7 +10,9 @@ function RepositoriesList({ repositories, loading }) {
     return repositories.map((repo) => {
       return (
         <StyledCardContainer key={repo.id}>
-          <StyledCardTitle onClick={() => window.open(repo.html_url)}>{repo.name}</StyledCardTitle>
+          <StyledCardTitle href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            {repo.name}
+          </StyledCardTitle>
           <StyledCardDescription>{repo.description}</StyledCardDescription>
           <StyledCardDetails>{repo.language}</StyledCardDetails>
         </StyledCardContainer>

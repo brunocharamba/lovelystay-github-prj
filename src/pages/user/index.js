@@ -3,7 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaHiking, FaRegMap, FaBuilding, FaGithub, FaBloggerB, FaArrowCircleLeft } from "react-icons/fa";
 
 import RepositoriesList from "../../components/RepositoriesList";
-import { useFetchUser, useFetchRepos } from "../../hooks";
+import { useFetch } from "../../hooks";
+import { helper } from "../../utils";
 
 import {
   StyledContainer,
@@ -21,8 +22,8 @@ import NotFound from "../../components/NotFound";
 
 function User() {
   const { id } = useParams();
-  const { data, isLoading } = useFetchUser(id);
-  const { data: repositories, isLoading: repositoriesLoading } = useFetchRepos(id);
+  const { data, isLoading } = useFetch(id);
+  const { data: repositories, isLoading: repositoriesLoading } = useFetch(`${id}/repos`);
   const navigate = useNavigate();
 
   const renderInformationCards = () => {
@@ -30,53 +31,43 @@ function User() {
       <StyledUserInformation>
         {data.company && (
           <StyledInformationField>
-            <>
-              <FaBuilding />
-              <span>{data.company}</span>
-            </>
+            <FaBuilding />
+            <span>{data.company}</span>
           </StyledInformationField>
         )}
         {data.location && (
           <StyledInformationField>
-            <>
-              <FaRegMap />
-              <span>{data.location}</span>
-            </>
+            <FaRegMap />
+            <span>{data.location}</span>
           </StyledInformationField>
         )}
         {data.followers > 0 && (
           <StyledInformationField>
-            <>
-              <FaHiking />
-              <span>{data.followers}</span>
-              <span>followers</span>
-            </>
+            <FaHiking />
+            <span>{data.followers}</span>
+            <span>followers</span>
           </StyledInformationField>
         )}
         {data.blog && (
           <StyledInformationField>
-            <>
-              <FaBloggerB />
-              <div onClick={() => window.open(data.blog)}>blog</div>
-            </>
+            <FaBloggerB />
+            <a href={helper.getValidUrl(data.blog)} target="_blank" rel="noopener noreferrer">
+              blog
+            </a>
           </StyledInformationField>
         )}
         {data.public_repos > 0 && (
           <StyledInformationField>
-            <>
-              <FaGithub />
-              <span>{data.public_repos}</span>
-              <span>public repositories</span>
-            </>
+            <FaGithub />
+            <span>{data.public_repos}</span>
+            <span>public repositories</span>
           </StyledInformationField>
         )}
         {data.public_gists > 0 && (
           <StyledInformationField>
-            <>
-              <FaGithub />
-              <span>{data.public_gists}</span>
-              <span>public gists</span>
-            </>
+            <FaGithub />
+            <span>{data.public_gists}</span>
+            <span>public gists</span>
           </StyledInformationField>
         )}
       </StyledUserInformation>
@@ -93,15 +84,19 @@ function User() {
         <StyledContentWrapper>
           <StyledUserInformationWrapper>
             <div>
-              <FaArrowCircleLeft data-testid="gobackbutton" onClick={() => navigate("/")} />
+              <button onClick={() => navigate("/")}>
+                <FaArrowCircleLeft />
+              </button>
               <StyledImage src={data.avatar_url} />
             </div>
             <div>
               <StyledUserTitle>
-                <h3 onClick={() => window.open(data.html_url)}>{data.name || `NO DISPLAY NAME`}</h3>
+                <a href={data.html_url} target="_blank" rel="noopener noreferrer">
+                  <h3>{data.name || `NO DISPLAY NAME`}</h3>
+                </a>
                 <div>@{data.login}</div>
               </StyledUserTitle>
-              {renderInformationCards()}
+              <div>{renderInformationCards()}</div>
             </div>
           </StyledUserInformationWrapper>
           <StyledMainContent>

@@ -4,7 +4,6 @@ import { colors } from "../../utils";
 export const StyledContainer = styled.div`
   display: flex;
   flex: 1;
-  width: 100vmax;
   height: 100vh;
   font-size: xx-large;
   text-transform: uppercase;
@@ -14,8 +13,13 @@ export const StyledContainer = styled.div`
   color: ${colors.light};
   background-color: ${colors.darkPurple};
   gap: 2rem;
+  padding: 2rem;
 
-  & > svg {
-    cursor: pointer;
+  & button {
+    display: flex;
+    background: none;
+    border: 0;
+    color: ${colors.light};
+    font-size: 1.75rem;
   }
 `;

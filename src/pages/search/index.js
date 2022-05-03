@@ -25,9 +25,9 @@ function Search() {
       <FaGithub />
       <StyledSearchBox>
         <input placeholder={baseMessage} onChange={(evt) => setSearch(evt.target.value)} onKeyUp={handleEnter}></input>
-        <div onClick={async () => handleSearch()}>
+        <button onClick={async () => handleSearch()}>
           <FaSearch />
-        </div>
+        </button>
       </StyledSearchBox>
       <span>{search ? "hit enter or click the button to go to the user page" : "search for the user"}</span>
     </Container>
