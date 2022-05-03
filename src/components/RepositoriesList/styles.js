@@ -8,24 +8,38 @@ export const StyledContainer = styled.div`
   gap: 1rem;
 `;
 
+export const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  & > button {
+    display: flex;
+    margin: 2rem 0;
+    background: none;
+    border: 0;
+    border-radius: 0.5rem;
+    color: ${colors.light};
+    background-color: ${colors.darkGray + "80"};
+    padding: 1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+  }
+`;
+
 export const StyledCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  height: 10rem;
   flex-shrink: 0;
   flex-grow: 1;
-
   width: 10rem;
-
+  height: 10rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   background: ${colors.lighterGray + "30"};
   color: ${colors.light};
   box-shadow: 4px 3px 9px 0px rgba(0, 0, 0, 0.75);
-
-  /* @media (max-width: ${sizes.mobile}) {
-    width: 100%;
-  } */
 `;
 
 export const StyledCardTitle = styled.a`

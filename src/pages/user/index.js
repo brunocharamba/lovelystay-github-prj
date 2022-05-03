@@ -20,11 +20,21 @@ import {
 import Loading from "../../components/Loading";
 import NotFound from "../../components/NotFound";
 
+const MAX_PAGE_SIZE = 8;
+
 function User() {
+  const [page, setPage] = React.useState(1);
+  const [canLoadMore, setCanLoadMore] = React.useState(true);
+  const [allRepositories, setAllRepositories] = React.useState([]);
+
   const { id } = useParams();
   const { data, isLoading } = useFetch(id);
-  const { data: repositories, isLoading: repositoriesLoading } = useFetch(`${id}/repos`);
+  const { data: repositories, isLoading: repositoriesLoading } = useFetch(`${id}/repos`, MAX_PAGE_SIZE, page);
   const navigate = useNavigate();
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
 
   const renderInformationCards = () => {
     return (
@@ -74,6 +84,20 @@ function User() {
     );
   };
 
+  React.useEffect(() => {
+    if (repositoriesLoading) return;
+    if (!canLoadMore) return;
+    if (repositories.length < MAX_PAGE_SIZE) setCanLoadMore(false);
+
+    const _repos = [...repositories];
+
+    console.log(_repos);
+
+    setAllRepositories([...allRepositories, ..._repos]);
+  }, [repositories]);
+
+  console.log(canLoadMore);
+
   if (!id) return <NotFound />;
   if (isLoading) return <Loading />;
   if (data.message) return <NotFound />;
@@ -100,7 +124,7 @@ function User() {
             </div>
           </StyledUserInformationWrapper>
           <StyledMainContent>
-            <RepositoriesList repositories={repositories} loading={repositoriesLoading} />
+            <RepositoriesList repositories={allRepositories} loading={repositoriesLoading} canLoadMore={canLoadMore} onNextPage={handleNextPage} />
           </StyledMainContent>
         </StyledContentWrapper>
       </StyledContentWrapper>

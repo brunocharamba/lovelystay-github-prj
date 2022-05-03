@@ -1,11 +1,9 @@
 import React from "react";
 import { useFetch } from "../../hooks";
 
-import { StyledContainer, StyledCardContainer, StyledCardTitle, StyledCardDescription, StyledCardDetails } from "./styles";
+import { StyledContainer, StyledCardContainer, StyledCardTitle, StyledCardDescription, StyledCardDetails, StyledButtonWrapper } from "./styles";
 
-function RepositoriesList({ repositories, loading }) {
-  // const { data: repositories, isLoading } = useFetch(`https://api.github.com/users/${userId}/repos`);
-
+function RepositoriesList({ repositories, loading, canLoadMore, onNextPage }) {
   const renderCards = () => {
     return repositories.map((repo) => {
       return (
@@ -26,6 +24,7 @@ function RepositoriesList({ repositories, loading }) {
     <>
       <h2>REPOSITORIES</h2>
       <StyledContainer>{renderCards()}</StyledContainer>
+      <StyledButtonWrapper>{canLoadMore && <button onClick={onNextPage}>Load More</button>}</StyledButtonWrapper>
     </>
   );
 }
